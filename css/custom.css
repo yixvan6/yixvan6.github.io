@@ -1,0 +1,14 @@
+body {
+	background: #eee url(/img/bg.png);
+}
+.markdown-body pre code {
+  padding: 0;
+}
+
+/*valine 只是简单加了个边框*/
+.v .vwrap {
+  border: 2px solid black !important;
+  border-radius: 6px !important;
+  overflow: visible !important;
+  counter-reset: avater;
+}

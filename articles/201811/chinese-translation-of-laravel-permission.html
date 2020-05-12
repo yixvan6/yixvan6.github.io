@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="PHP，Laravel，Linux，Git，hehorange，橙子好好吃，呵呵橙，笔记，随笔">
+  <meta name="author" content="hehorange">
+  <meta name="keywords" content="PHP，Laravel，Linux，Git，hehorange，橙子好好吃，呵呵橙，笔记，随笔">
+  <title>laravel-permission 中文翻译 - 橙子好好吃</title>
+
+  <!-- 为观影记录组件添加的 meta 头 -->
+  <meta name="referrer" content="never">
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>橙子好好吃</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/movies/">
+              <i class="iconfont icon-youtube-fill"></i>
+              观影</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post_default_banner.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2018-11-09 15:57">
+                    2018年11月9日 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    3.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    48
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  最后更新于：2020年5月13日 凌晨
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>初次接触到 <a href="https://github.com/spatie/laravel-permission" target="_blank" rel="noopener"><strong>spatie/laravel-permission</strong></a> 这个包，没找到中文文档，自己抽空翻译了一下，做了很小部分的删减，基本没影响。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>此扩展包适用于 Laravel 5.4 或更高版本。<br>可以用 composer 安装：<br><code>composer require spatie/laravel-permission</code><br>在 Laravel 5.5 中，服务提供器会被自动注册，而在早一点的版本中，需要手动添加服务提供器到<br><code>config/app.php</code> 中：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-string">'providers'</span> =&gt; [
+	<span class="hljs-comment">// ...</span>
+	Spatie\Permission\PermissionServiceProvider::class,
+];</code></pre></div>
+
+<p>通过 <code>vendor:publish</code> 发布相关迁移文件：<br><code>php artisan vendor:publish --provider=&quot;Spatie\Permission\PermissionServiceProvider&quot; --tag=&quot;migrations&quot;</code><br>然后运行 <code>php artisan migrate</code> 生成相关数据表。<br>发布配置文件：<br><code>php artisan vendor:publish --provider=&quot;Spatie\Permission\PermissionServiceProvider&quot; --tag=&quot;config&quot;</code></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="使用概览"><a href="#使用概览" class="headerlink" title="使用概览"></a>使用概览</h3><ul>
+<li><p>首先，需要添加 <code>Spatie\Permission\Traits\HasRoles</code> <strong>traits</strong> 到 <code>User</code> model(s)：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">use</span> <span class="hljs-title">Spatie</span>\<span class="hljs-title">Permission</span>\<span class="hljs-title">Traits</span>\<span class="hljs-title">HasRoles</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Authenticatable</span></span>
+<span class="hljs-class"></span>&#123;
+	<span class="hljs-keyword">use</span> <span class="hljs-title">HasRoles</span>;
+	<span class="hljs-comment">// ...</span>
+&#125;</code></pre></div>
+<blockquote>
+<p>Note: 如果要使用 <code>HasRoles</code> trait 到其它 model，需要添加属性 <code>protected $guard_name = &#39;web&#39;;</code>，否则会出现错误！</p>
+</blockquote>
+</li>
+<li><p>此扩展包允许用户与权限和角色相关联，每一个角色关联多个权限，任意一个 Role 和 Permission 都是 Eloquent models。<br>可以通过 <code>create</code> 创建：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">use</span> <span class="hljs-title">Spatie</span>\<span class="hljs-title">Permission</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Role</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Spatie</span>\<span class="hljs-title">Permission</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Permission</span>;
+
+$role = Role::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'writer'</span>]);
+$permission = Permission::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'edit'</span>]);</code></pre></div>
+<p>给角色分配一个或多个权限：</p>
+<div class="hljs"><pre><code class="hljs php">$role-&gt;givePermissionTo(<span class="hljs-string">'edit'</span>);
+$role-&gt;givePermissionTo(<span class="hljs-string">'edit'</span>, <span class="hljs-string">'delete'</span>);
+$permission-&gt;assignRole($role);</code></pre></div>
+<p>权限与角色 <strong>同步</strong>：</p>
+<div class="hljs"><pre><code class="hljs php">$role-&gt;syncPermissions($permissions);
+$permission-&gt;syncRoles($roles);</code></pre></div>
+<p>从角色移除一个权限：</p>
+<div class="hljs"><pre><code class="hljs php">$role-&gt;revokePermissionTo($permission);
+$permission-&gt;removeRole($role);</code></pre></div>
+
+</li>
+</ul>
+<p>如果你使用多个 guards，需要设置 <code>guard_name</code>。</p>
+<ul>
+<li><p><code>HasRoles</code> <strong>trait</strong> 为你的 model 添加了 Eloquent relationships，因此可直接使用这些关联方法：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-comment">// 获取直接分配给用户的所有权限</span>
+$permissions = $user-&gt;permissions;
+
+<span class="hljs-comment">// 获取用户的所有权限，包括直接分配的、通过角色继承的，或者两者全部</span>
+$permissions = $user-&gt;getDirectPermissions();
+$permissions = $user-&gt;getPermissionsViaRoles();
+$permissions = $user-&gt;getAllPermissions();
+
+<span class="hljs-comment">// 获取用户所有角色名称</span>
+$roles = $user-&gt;getRoleNames(); <span class="hljs-comment">// 返回一个集合(collection)</span></code></pre></div>
+</li>
+<li><p><code>HasRoles</code> trait 还提供了本地作用域， <code>role</code> 和 <code>permission</code> <strong>scope</strong>，去查询特定的角色或权限</p>
+<div class="hljs"><pre><code class="hljs php">$users = User::role(<span class="hljs-string">'writer'</span>)-&gt;get(); <span class="hljs-comment">// 返回拥有 'writer' 角色的用户</span>
+$users = User::permission(<span class="hljs-string">'edit'</span>)-&gt;get(); <span class="hljs-comment">// 返回拥有特定权限的用户（包括直接分配的和通过角色继承的）</span></code></pre></div>
+<blockquote>
+<p><code>role</code> 和 <code>permission</code> <strong>scope</strong> 可接收字符串，角色(\Spatie\Permission\Models\Role)/权限(Permission)实体或集合(\Illuminate\Support\Collection)实体</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="「直接」-权限"><a href="#「直接」-权限" class="headerlink" title="「直接」 权限"></a>「直接」 权限</h3><ul>
+<li><p>权限可以分配给任何一个用户：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;givePermissionTo(<span class="hljs-string">'edit'</span>);
+<span class="hljs-comment">// 一次赋予多个权限</span>
+$user-&gt;givePermissionTo(<span class="hljs-string">'edit'</span>, <span class="hljs-string">'delete'</span>);
+<span class="hljs-comment">// 也可传入一个数组</span>
+$user-&gt;givePermissionTo([<span class="hljs-string">'edit'</span>, <span class="hljs-string">'delete'</span>]);</code></pre></div>
+</li>
+<li><p>从用户移除权限：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;revokePermissionTo(<span class="hljs-string">'edit'</span>);
+<span class="hljs-comment">// 同步权限，没有的权限会添加，不一致的会移除</span>
+$user-&gt;syncPermissions([<span class="hljs-string">'edit'</span>, <span class="hljs-string">'delete'</span>]);</code></pre></div>
+</li>
+<li><p>检测用户是否有某个权限：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;hasPermissionTo(<span class="hljs-string">'edit'</span>);
+
+<span class="hljs-comment">// 或者传入权限的 id</span>
+$user-&gt;hasPermissionTo(<span class="hljs-string">'1'</span>);
+$user-&gt;hasPermissionTo(Permission::find(<span class="hljs-number">1</span>)-&gt;id);
+$user-&gt;hasPermissionTo($somePermission-&gt;id);</code></pre></div>
+</li>
+<li><p>判断用户是否具有一组权限中的任意一个或全部：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;hasAnyPermission([<span class="hljs-string">'edit'</span>, <span class="hljs-string">'publish'</span>, <span class="hljs-string">'unpublish'</span>]);
+$user-&gt;hasAllPermissions([<span class="hljs-string">'edit'</span>, <span class="hljs-string">'publish'</span>, <span class="hljs-string">'unpublish'</span>]);
+<span class="hljs-comment">// 同样可以仅传入权限的 id</span>
+$user-&gt;hasAnyPermission([<span class="hljs-string">'edit'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>]);</code></pre></div>
+</li>
+<li><p>保存的权限会被 <code>Illuminate\Auth\Access\Gate</code> 类注册为默认的 guard，所以可以用 Laravel 的 <code>can</code> 函数来检测权限：<br><code>$user-&gt;can(&#39;edit&#39;);</code></p>
+</li>
+</ul>
+<h3 id="通过角色使用权限"><a href="#通过角色使用权限" class="headerlink" title="通过角色使用权限"></a>通过角色使用权限</h3><ul>
+<li><p>一个角色可以赋予给任何用户：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;assignRole(<span class="hljs-string">'writer'</span>);
+<span class="hljs-comment">// 一次赋予多个角色</span>
+$user-&gt;assignRole(<span class="hljs-string">'writer'</span>, <span class="hljs-string">'admin'</span>);
+<span class="hljs-comment">// 或者传入一个数组</span>
+$user-&gt;assignRole([<span class="hljs-string">'writer'</span>, <span class="hljs-string">'admin'</span>]);</code></pre></div>
+</li>
+<li><p>移除角色：<br><code>$user-&gt;removeRole(&#39;writer&#39;);</code></p>
+</li>
+<li><p>同步角色：<br>// 不一致的角色会被移除，替换为数组中提供的角色<br><code>$user-&gt;syncRoles([&#39;writer&#39;, &#39;admin&#39;]);</code></p>
+</li>
+<li><p>检测用户是否具有特定角色，一个、任意或全部：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;hasRole(<span class="hljs-string">'writer'</span>);
+$user-&gt;hasAnyRole(Role::all());
+$user-&gt;hasAllRoles(Role::all());</code></pre></div>
+<blockquote>
+<p>assignRole, hasRole, hasAnyRole, hasAllRoles 和 removeRole，这些函数可接收字符串、角色(<code>\Spatie\Permission\Models\Role</code>)实例、集合(<code>\Illuminate\Support\Collection</code>)实例</p>
+</blockquote>
+</li>
+<li><p>给角色分配权限：<br><code>$role-&gt;givePermissionTo(&#39;edit articles&#39;);</code></p>
+</li>
+<li><p>检测：<br><code>$role-&gt;hasPermissionTo(&#39;edit articles&#39;);</code></p>
+</li>
+<li><p>从角色中移除权限：<br><code>$role-&gt;revokePermissionTo(&#39;edit articles&#39;);</code></p>
+<blockquote>
+<p>givePermissionTo 和 revokePermissionTo 函数可接收字符串或权限(<code>Spatie\Permission\Models\Permission</code>)实体</p>
+</blockquote>
+</li>
+<li><p>权限会自动依附于角色，另外，权限也可直接分配给用户。比如下面的示例：</p>
+<div class="hljs"><pre><code class="hljs php">$role = Role::findByName(<span class="hljs-string">'writer'</span>);
+$role-&gt;givePermissionTo(<span class="hljs-string">'edit articles'</span>);
+
+$user-&gt;assignRole(<span class="hljs-string">'writer'</span>);
+$user-&gt;givePermissionTo(<span class="hljs-string">'delete articles'</span>);</code></pre></div>
+<p>例子中，用户拥有了 ‘edit articles’ 和 ‘delete articles’ 权限，edit 是通过角色，而 delete 是用户的直接权限，因为它是被直接分配的。<br>当我们调用 <code>$user-&gt;hasDirectPermission(&#39;delete articles&#39;)</code> 时，会返回 <code>true</code>，<br>而调用 <code>$user-&gt;hasDirectPermission(&#39;edit articles&#39;)</code> 会返回 <code>false</code>。</p>
+<blockquote>
+<p>在需要对用户的直接权限和角色权限分别操作时，这个方法是有用的。</p>
+</blockquote>
+</li>
+<li><p>获取用户的权限：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-comment">// 「直接」 权限</span>
+$user-&gt;getDirectPermissions() <span class="hljs-comment">// 或者 $user-&gt;permissions;</span>
+
+<span class="hljs-comment">// 继承自角色的权限</span>
+$user-&gt;getPermissionsViaRoles();
+
+<span class="hljs-comment">// 所有权限（直接的、继承的）</span>
+$user-&gt;getAllPermissions();</code></pre></div>
+<p>结合上面的用例，第一个返回的结果会是 ‘delete articles’ 权限，第二个是 ‘edit articles’，第三个则是两个权限都有。</p>
+<blockquote>
+<p>注意：返回的结果都是权限(<code>Spatie\Permission\Models\Permission</code>)实例集合</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="使用-Blade-指令"><a href="#使用-Blade-指令" class="headerlink" title="使用 Blade 指令"></a>使用 Blade 指令</h3><p>扩展包还添加了 <code>Blade</code> 指令来判断已登录用户是否具有某些角色。</p>
+<p>可选的，你可以传入 <code>guard</code> 作为第二个参数来进行检测。</p>
+<ul>
+<li>Blade and Roles</li>
+</ul>
+<p>检测是否有特定角色：</p>
+<div class="hljs"><pre><code class="hljs plain">@role(&#39;writer&#39;)
+    I am a writer!
+@else
+    I am not a writer...
+@endrole
+
+&#x2F;&#x2F; 等同于
+@hasrole(&#39;writer&#39;)
+    I am a writer!
+@else
+    I am not a writer...
+@endhasrole</code></pre></div>
+
+<p>检测是否有角色列表中的任意一个：</p>
+<div class="hljs"><pre><code class="hljs plain">@hasanyrole($collectionOfRoles)
+    I have one or more of these roles!
+@else
+    I have none of these roles...
+@endhasanyrole
+&#x2F;&#x2F; or
+@hasanyrole(&#39;writer|admin&#39;)
+    I am either a writer or an admin or both!
+@else
+    I have none of these roles...
+@endhasanyrole</code></pre></div>
+
+<p>检测是否拥有所列的所有角色：</p>
+<div class="hljs"><pre><code class="hljs plain">@hasallroles($collectionOfRoles)
+    I have all of these roles!
+@else
+    I do not have all of these roles...
+@endhasallroles
+&#x2F;&#x2F; or
+@hasallroles(&#39;writer|admin&#39;)
+    I am both a writer and an admin!
+@else
+    I do not have all of these roles...
+@endhasallroles</code></pre></div>
+
+<p>作为一种选择，还可使用 <code>@unlessrole</code> 对特定角色进行反向判断</p>
+<div class="hljs"><pre><code class="hljs plain">@unlessrole(&#39;does not have this role&#39;)
+    I do not have the role
+@else
+    I do have the role
+@endunlessrole</code></pre></div>
+
+<ul>
+<li>Blade and Permissions</li>
+</ul>
+<p>扩展包没有添加任何权限相关的 Blade 指令，可以使用 Laravel 自带的 <code>@can</code> 指令来检测用户是否拥有特定权限</p>
+<div class="hljs"><pre><code class="hljs plain">@can(&#39;edit articles&#39;)
+  &#x2F;&#x2F; ...
+@endcan
+
+&#x2F;&#x2F; or
+@if(auth()-&gt;user()-&gt;can(&#39;edit articles&#39;) &amp;&amp; $some_other_condition)
+  &#x2F;&#x2F; ...
+@endif</code></pre></div>
+
+<h3 id="定义一个超级管理员-Super-Admin"><a href="#定义一个超级管理员-Super-Admin" class="headerlink" title="定义一个超级管理员(Super-Admin)"></a>定义一个超级管理员(Super-Admin)</h3><p>强烈建议：「超级管理员」 通过设定全局 <code>Gate::before</code> 规则来检测所有期望的角色。</p>
+<p>这样就能实现在整个应用中使用基于权限操作的最佳实践，而不需要在所有地方总是要进行是否是 「超级管理员」 的检测。</p>
+<p>看一个在应用中定义一个 <code>Super-Admin Gate</code> 规则的例子：<a href="https://github.com/spatie/laravel-permission/wiki/Global-%22Admin%22-role" target="_blank" rel="noopener">Defining a Super-Admin Gate rule</a></p>
+<h3 id="最佳实践-–-roles-vs-permissions"><a href="#最佳实践-–-roles-vs-permissions" class="headerlink" title="最佳实践 – roles vs permissions"></a>最佳实践 – roles vs permissions</h3><p>只用 <strong>权限相关</strong> 的代码来构建你的应用通常是最好的。在这种方式中，你可以在应用的任何地方使用 Laravel 自带的 <code>@can</code> 和 <code>can()</code> 方法。</p>
+<p><strong>角色</strong> 仍然可被用来划分权限对于简单的分配，在有必要时，你仍然能使用基于角色的辅助方法。<br>但是，大部分与应用相关的逻辑，通常使用 <code>can</code> 方法能被最好的控制，它能让 Laravel 的 <code>Gate</code> 层去做所有繁重的工作。</p>
+<h3 id="多个-guards"><a href="#多个-guards" class="headerlink" title="多个 guards"></a>多个 guards</h3><p>当使用 Laravel 默认的 auth 配置，上面所有方法都可以解决常规需求，不需要额外的设置。</p>
+<p>然而，当使用多个 guards 时，权限和角色的呈现就会像命名空间一样，那意味着每个 guard 会有它自己独有的一组权限和角色分配给用户。</p>
+<ul>
+<li>使用权限和角色 with multiple guards</li>
+</ul>
+<p>在创建新的权限或角色时，如果没有指定 guard，那么将会使用 <code>auth.guards</code> 配置数组中设置的第一个 guard。<br>若要为特定 guard 创建权限或角色，你必须指定 <code>guard_name</code>：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-comment">// Create a superadmin role for the admin users</span>
+$role = Role::create([<span class="hljs-string">'guard_name'</span> =&gt; <span class="hljs-string">'admin'</span>, <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'superadmin'</span>]);
+
+<span class="hljs-comment">// Define a `publish articles` permission for the admin users belonging to the admin guard</span>
+$permission = Permission::create([<span class="hljs-string">'guard_name'</span> =&gt; <span class="hljs-string">'admin'</span>, <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'publish articles'</span>]);
+
+<span class="hljs-comment">// Define a *different* `publish articles` permission for the regular users belonging to the web guard</span>
+$permission = Permission::create([<span class="hljs-string">'guard_name'</span> =&gt; <span class="hljs-string">'web'</span>, <span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'publish articles'</span>]);</code></pre></div>
+
+<p>检测一个用户在指定 guard 下是否有某些权限：<br><code>$user-&gt;hasPermissionTo(&#39;publish articles&#39;, &#39;admin&#39;);</code></p>
+<blockquote>
+<p>Note: 当要决定一个角色/权限对于给定模型是否有效时，会按下面的顺序选择 guard ：<br>1，此 model 中的 <code>$guard_name</code> 属性；2（暂定，不知道怎么翻），the guard in the config (through a provider)；3，<code>auth.guards</code> 配置数组中设置的第一个 guard；4，<code>auth.defaults.guard</code> 中的设置。</p>
+</blockquote>
+<blockquote>
+<p>Note: 当使用默认 <code>web</code> 之外的 guard 时，需要在你的 model 中声明 <code>$guard_name</code> 属性。</p>
+</blockquote>
+<blockquote>
+<p>Note: 如果你的应用只用一个 guard，但并不是 <code>web</code>，那就改变 <code>config/app.php</code> 中所列 guards 的顺序，将你的 guard 放在 guards 列表的第一个，作为唯一默认。</p>
+</blockquote>
+<ul>
+<li>分配权限或角色给 guard users</li>
+</ul>
+<p>你可以使用相同的方法来分配权限和角色给用户，只需要确认权限或角色的 <code>guard_name</code> 与用户的相匹配，否则会抛出一个 <code>GuardDoesNotMatch</code> 异常。</p>
+<ul>
+<li>使用 Blade 指令 with multiple guards</li>
+</ul>
+<p>你可以使用上面提到的所有 Blade 指令，需要传入你想使用的 guard 作为第二个参数。</p>
+<div class="hljs"><pre><code class="hljs plain">@role(&#39;super-admin&#39;, &#39;admin&#39;)
+    I am a super-admin!
+@else
+    I am not a super-admin...
+@endrole</code></pre></div>
+
+<h3 id="使用中间件"><a href="#使用中间件" class="headerlink" title="使用中间件"></a>使用中间件</h3><p>扩展包中还包含了几个中间件：<code>RoleMiddleware</code>、<code>PermissionMiddleware</code>、<code>RoleOrPermissionMiddleware</code>，你可以将它们加入到 <code>app/Http/Kernel.php</code> 中：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">protected</span> $routeMiddleware = [
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-string">'role'</span> =&gt; \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    <span class="hljs-string">'permission'</span> =&gt; \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    <span class="hljs-string">'role_or_permission'</span> =&gt; \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+];</code></pre></div>
+
+<p>然后就可以使用它们来保护路由了：</p>
+<div class="hljs"><pre><code class="hljs php">Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role:super-admin'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'permission:publish articles'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role:super-admin'</span>,<span class="hljs-string">'permission:publish articles'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role_or_permission:super-admin'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role_or_permission:publish articles'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);</code></pre></div>
+
+<p>可选择地，在使用多个角色或权限时，可以用管道符(<strong><code>|</code></strong>)来隔开：</p>
+<div class="hljs"><pre><code class="hljs php">Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role:super-admin|writer'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'permission:publish articles|edit articles'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);
+
+Route::group([<span class="hljs-string">'middleware'</span> =&gt; [<span class="hljs-string">'role_or_permission:super-admin|edit articles'</span>]], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">//</span>
+&#125;);</code></pre></div>
+
+<p>同样也可在控制器中使用，在其构造函数中设置想要的中间件即可：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">$this</span>-&gt;middleware([<span class="hljs-string">'role:super-admin'</span>,<span class="hljs-string">'permission:publish articles|edit articles'</span>]);
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">$this</span>-&gt;middleware([<span class="hljs-string">'role_or_permission:super-admin|edit articles'</span>]);
+&#125;</code></pre></div>
+
+<h4 id="捕捉角色或权限的异常"><a href="#捕捉角色或权限的异常" class="headerlink" title="捕捉角色或权限的异常"></a>捕捉角色或权限的异常</h4><p>如果要重写默认的 <code>403</code> 响应，可以用应用的异常处理来捕捉 <code>UnauthorizedException</code>：</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span><span class="hljs-params">($request, Exception $exception)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span> ($exception <span class="hljs-keyword">instanceof</span> \Spatie\Permission\Exceptions\UnauthorizedException) &#123;
+        <span class="hljs-comment">// Code here ...</span>
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">parent</span>::render($request, $exception);
+&#125;</code></pre></div>
+
+<h3 id="使用-Artisan-命令"><a href="#使用-Artisan-命令" class="headerlink" title="使用 Artisan 命令"></a>使用 Artisan 命令</h3><p>还可以在 console 端用 artisan 命令来创建角色或权限：</p>
+<div class="hljs"><pre><code class="hljs bash">php artisan permission:create-role writer
+php artisan permission:create-permission <span class="hljs-string">"edit articles"</span></code></pre></div>
+
+<p>若要为特定 guard 创建权限或角色，则需要指定 guard 名称作为第二个参数：</p>
+<div class="hljs"><pre><code class="hljs bash">php artisan permission:create-role writer web
+php artisan permission:create-permission <span class="hljs-string">"edit articles"</span> web</code></pre></div>
+
+<p>在创建角色时，可以同时创建并分配权限：</p>
+<p><code>php artisan permission:create-role writer web &quot;create articles|edit articles&quot;</code></p>
+<h2 id="单元测试-（暂不翻，还没学到单元测试）"><a href="#单元测试-（暂不翻，还没学到单元测试）" class="headerlink" title="单元测试 （暂不翻，还没学到单元测试）"></a>单元测试 （暂不翻，还没学到单元测试）</h2><p>In your application’s tests, if you are not seeding roles and permissions as part of your test setUp() then you may run into a chicken/egg situation where roles and permissions aren’t registered with the gate (because your tests create them after that gate registration is done). Working around this is simple: In your tests simply add a setUp() instruction to re-register the permissions, like this:</p>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setUp</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-comment">// first include all the normal setUp operations</span>
+    <span class="hljs-keyword">parent</span>::setUp();
+
+    <span class="hljs-comment">// now re-register all the roles and permissions</span>
+    <span class="hljs-keyword">$this</span>-&gt;app-&gt;make(\Spatie\Permission\PermissionRegistrar::class)-&gt;registerPermissions();
+&#125;</code></pre></div>
+
+<h2 id="数据库填充-Seeding"><a href="#数据库填充-Seeding" class="headerlink" title="数据库填充(Seeding)"></a>数据库填充(Seeding)</h2><p>对于数据库填充有 2 点说明：</p>
+<ol>
+<li>在填充前最好先清除 <code>spatie.permission.cache</code> 缓存，避免缓存冲突出现错误。清除缓存可以通过一条 Artisan 命令来完成，或者直接在填充类中完成（看下面示例）。</li>
+<li>下面示例中演示了清除缓存、创建权限并分配给角色：<div class="hljs"><pre><code class="hljs php"><span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Database</span>\<span class="hljs-title">Seeder</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Spatie</span>\<span class="hljs-title">Permission</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Role</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Spatie</span>\<span class="hljs-title">Permission</span>\<span class="hljs-title">Models</span>\<span class="hljs-title">Permission</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RolesAndPermissionsSeeder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Seeder</span></span>
+<span class="hljs-class"></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>
+<span class="hljs-function">    </span>&#123;
+        <span class="hljs-comment">// Reset cached roles and permissions</span>
+        app()[<span class="hljs-string">'cache'</span>]-&gt;forget(<span class="hljs-string">'spatie.permission.cache'</span>);
+
+        <span class="hljs-comment">// create permissions</span>
+        Permission::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'edit articles'</span>]);
+        Permission::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'delete articles'</span>]);
+        Permission::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'publish articles'</span>]);
+        Permission::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'unpublish articles'</span>]);
+
+        <span class="hljs-comment">// create roles and assign created permissions</span>
+
+        $role = Role::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'writer'</span>]);
+        $role-&gt;givePermissionTo(<span class="hljs-string">'edit articles'</span>);
+
+        $role = Role::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'moderator'</span>]);
+        $role-&gt;givePermissionTo([<span class="hljs-string">'publish articles'</span>, <span class="hljs-string">'unpublish articles'</span>]);
+
+        $role = Role::create([<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'super-admin'</span>]);
+        $role-&gt;givePermissionTo(Permission::all());
+    &#125;
+&#125;</code></pre></div>
+
+</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>如果需要 <strong>扩展</strong> 已有的 <code>Role</code> 和 <code>Permission</code> 模型，请注意：</p>
+<ul>
+<li>你的 <code>Role</code> model 需要继承自 <code>Spatie\Permission\Models\Role</code> model</li>
+<li>你的 <code>Permission</code> model 需要继承自 <code>Spatie\Permission\Models\Permission</code> model</li>
+</ul>
+<p>如果需要 <strong>替换</strong> 已有的 <code>Role</code> 和 <code>Permission</code> 模型，请注意：</p>
+<ul>
+<li>你的 <code>Role</code> model 需要实现(implement) <code>Spatie\Permission\Contracts\Role</code> contract</li>
+<li>你的 <code>Permission</code> model 需要实现(implement) <code>Spatie\Permission\Contracts\Permission</code> contract</li>
+</ul>
+<p>在这两种情况下，不论是扩展还是替换，都需要在配置中指定你的新模型。在用下面的命令发布(publish)了配置文件后，你必须更新配置文件中的 <code>models.role</code> 和 <code>models.permission</code> 值。</p>
+<p><code>php artisan vendor:publish --provider=&quot;Spatie\Permission\PermissionServiceProvider&quot; --tag=&quot;config&quot;</code></p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>角色和权限数据会被缓存起来以提升速度。</p>
+<p>当使用提供的方法来操作角色和权限时，其缓存会自动重置：</p>
+<div class="hljs"><pre><code class="hljs php">$user-&gt;assignRole(<span class="hljs-string">'writer'</span>);
+$user-&gt;removeRole(<span class="hljs-string">'writer'</span>);
+$user-&gt;syncRoles(params);
+$role-&gt;givePermissionTo(<span class="hljs-string">'edit articles'</span>);
+$role-&gt;revokePermissionTo(<span class="hljs-string">'edit articles'</span>);
+$role-&gt;syncPermissions(params);
+$permission-&gt;assignRole(<span class="hljs-string">'writer'</span>);
+$permission-&gt;removeRole(<span class="hljs-string">'writer'</span>);
+$permission-&gt;syncRoles(params);</code></pre></div>
+
+<p><strong>然而</strong>，如果你没有用扩展包提供的方法，而是直接在数据库里手动操作权限/角色数据时，你将看不到应用改变的反馈，除非你手动重置缓存。</p>
+<h3 id="手动重置缓存"><a href="#手动重置缓存" class="headerlink" title="手动重置缓存"></a>手动重置缓存</h3><p>执行 Artisan 命令即可：<br><code>php artisan cache:forget spatie.permission.cache</code></p>
+<h3 id="缓存标识符"><a href="#缓存标识符" class="headerlink" title="缓存标识符"></a>缓存标识符</h3><p><strong>TIP:</strong> 如果用了某些缓存服务比如 <code>redis</code>、<code>memcached</code>，或有其他站点运行在你的服务器上，这可能会导致缓存冲突。<br>一个简单有效的方式是在 <code>/config/cache.php</code> 中设置你自己的 「缓存前缀」 来区分每个应用，这将会避免其他应用意外地使用或更改了你的缓存数据。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BF%BB%E8%AF%91/">翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Laravel-package/">Laravel package</a>
+                    
+                      <a class="hover-with-bg" href="/tags/laravel-permission/">laravel permission</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/articles/201809/hexo-blog-building-records.html">
+                        <span class="hidden-mobile">Hexo 博客搭建记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.14/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "QE9zukzKtTExVYPgQcRNinBu-MdYXbMMI",
+        app_key: "yXWKt3QeCzAdqcP0MEU0WU5u",
+        placeholder: "说点什么吧~~",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"Black","artist":"Danger Mouse$Daniele Luppi","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/Black%20-%20Danger%20Mouse%26Daniele%20Luppi.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000001hw1hV2MsSjb.jpg"},{"name":"U-Turn","artist":"Nicola Piovani","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/U-Turn%20%28Lili%29%20-%20Nicola%20Piovani.mp3","cover":"https://p3.music.126.net/FP1JjtVkmkkipdKTI7rhLw==/1684451813758720.jpg"},{"name":"拒绝情话","artist":"庆庆","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E6%8B%92%E7%BB%9D%E6%83%85%E8%AF%9D%20-%20%E5%BA%86%E5%BA%86.mp3","cover":"https://p3.music.126.net/rG7zE6K3A373UH8XHI_NqQ==/109951163400201893.jpg"},{"name":"アイロニ","artist":"majiko","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E3%82%A2%E3%82%A4%E3%83%AD%E3%83%8B%20-%20majiko.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000004GC5gr1Djev0.jpg"},{"name":"萨琳娜","artist":"张尧","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E8%90%A8%E7%90%B3%E5%A8%9C%20-%20%E5%BC%A0%E5%B0%A7.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000kT79D3XFaYJ.jpg"},{"name":"絆","artist":"miu-clips","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E7%B5%86%20-%20miu-clips.mp3","cover":"5TLKyo1Ta7Yg==/109951163338271797.jpg"},{"name":"圆","artist":"AGA","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E5%9C%86%20-%20AGA.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000V9yae4XbyxL.jpg"},{"name":"充电器","artist":"コアラモード","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E5%85%85%E7%94%B5%E5%99%A8%20-%20%E3%82%B3%E3%82%A2%E3%83%A9%E3%83%A2%E3%83%BC%E3%83%89.mp3","cover":"https://p3.music.126.net/hLC4zRBvnQslwmx19EJCvQ==/18565253836759289.jpg"},{"name":"记昨日书","artist":"伏仪","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E8%AE%B0%E6%98%A8%E6%97%A5%E4%B9%A6%20-%20%E4%BC%8F%E4%BB%AA.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000004dZ9EI1JDzsW.jpg"},{"name":"The Flood","artist":"Joshua Hyslop","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/The%20Flood%20-%20Joshua%20Hyslop.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M0000037uJuv3VB1Do.jpg"},{"name":"雨下一整晚","artist":"周杰伦","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E9%9B%A8%E4%B8%8B%E4%B8%80%E6%95%B4%E6%99%9A%20-%20Jay.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000bviBl4FjTpO.jpg"},{"name":"Think Again","artist":"Kate Havnevik","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/Think%20Again%20-%20Kate%20Havnevik.mp3","cover":"https://p3.music.126.net/XfcPoljRr2ONWK3A40fa2g==/827932255760293.jpg"},{"name":"It Takes A Lot To Konw A Man","artist":"Damien Rice","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/It%20Takes%20A%20Lot%20To%20Konw%20A%20Man%20-%20Damien%20Rice.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M0000018GfAl2V7XR8.jpg"},{"name":"日が落ちるまで","artist":"ハンバート ハンバート","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E6%97%A5%E3%81%8C%E8%90%BD%E3%81%A1%E3%82%8B%E3%81%BE%E3%81%A7%20-%20%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%83%88%20%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%83%88.mp3","cover":"https://p3.music.126.net/RqP5ECFl5Qy-x-obsuudKQ==/938982930120740.jpg"}]
+    });
+  }
+</script>
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- 一言 -->
+    <p id="hitokoto" style="font-weight: bold;font-size: 17px;color: #4ecdc4;">好好学习，天天向上</p>
+    <p id="from" style="font-style: italic;color: #1a535c"></p>
+
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love" style="color: #ff6b6b"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      <i class="iconfont icon-codeforces"></i>
+      <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    &nbsp;|&nbsp;
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      <i class="iconfont icon-friends"></i>
+      <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?3a1762ce87be0b3e32c5317edbad11c1";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "laravel-permission 中文翻译&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 加入一言 -->
+<script>
+  fetch('https://v1.hitokoto.cn?c=d&c=i&c=k')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto')
+      hitokoto.innerText = '“' + data.hitokoto + '”'
+      const from = document.getElementById('from')
+      from.innerText = '——— 《' + data.from + '》'
+      })
+      .catch(console.error)
+</script>
+
+
+</body>
+</html>

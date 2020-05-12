@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="PHP，Laravel，Linux，Git，hehorange，橙子好好吃，呵呵橙，笔记，随笔">
+  <meta name="author" content="hehorange">
+  <meta name="keywords" content="PHP，Laravel，Linux，Git，hehorange，橙子好好吃，呵呵橙，笔记，随笔">
+  <title>让Sublime Text支持浏览器中预览 - 橙子好好吃</title>
+
+  <!-- 为观影记录组件添加的 meta 头 -->
+  <meta name="referrer" content="never">
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>橙子好好吃</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/movies/">
+              <i class="iconfont icon-youtube-fill"></i>
+              观影</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post_default_banner.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2018-09-03 21:12">
+                    2018年9月3日 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    395 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    5
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  最后更新于：2020年5月12日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>原文链接：<a href="https://imququ.com/post/view-sublime-text-2-file-in-browser.html" target="_blank" rel="noopener">https://imququ.com/post/view-sublime-text-2-file-in-browser.html</a></p>
+<p>此方法是用 <strong>Python</strong> 来新建一个插件。原文是在 Sublime Text2 版本下，在 ST3 下仍然可用。</p>
+<h3 id="一、新建插件"><a href="#一、新建插件" class="headerlink" title="一、新建插件"></a>一、新建插件</h3><p>点击菜单 <code>Tools -&gt; Developer -&gt; New Plugin</code>，在创建好的 py 文件输入下列内容：</p>
+<div class="hljs"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sublime, sublime_plugin
+<span class="hljs-keyword">import</span> webbrowser
+
+url_map = &#123;
+    <span class="hljs-string">'D:\\wamp\\www\\'</span> : <span class="hljs-string">'http://localhost/'</span>,
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OpenBrowserCommand</span><span class="hljs-params">(sublime_plugin.TextCommand)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self,edit)</span>:</span>
+        window = sublime.active_window()
+        window.run_command(<span class="hljs-string">'save'</span>)
+        url = self.view.file_name()
+        flag = <span class="hljs-literal">False</span>
+        <span class="hljs-keyword">for</span> path, domain <span class="hljs-keyword">in</span> url_map.items():
+            <span class="hljs-keyword">if</span> url.startswith(path):
+                url = url.replace(path, domain).replace(<span class="hljs-string">'\\'</span>, <span class="hljs-string">'/'</span>)
+                flag = <span class="hljs-literal">True</span>
+                <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> flag:
+            url = <span class="hljs-string">'file://'</span> + url
+        webbrowser.open_new(url)</code></pre></div>
+<p>代码只有几行，大部分还是参考的 <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&amp;t=3851" target="_blank" rel="noopener">这个帖子</a></p>
+<p>将文件保存到 <code>Packages/User</code> 目录（Packages 可通过菜单里的 Browse Packages…打开），文件名随意，如 open_browser.py。插件部分完工了。</p>
+<h3 id="二、为新插件设置快捷键"><a href="#二、为新插件设置快捷键" class="headerlink" title="二、为新插件设置快捷键"></a>二、为新插件设置快捷键</h3><p>选择 <code>Preferences -&gt; key Bindings-User</code> 打开个人快捷键配置，输入下列内容：</p>
+<p><code>{ &quot;keys&quot;: [&quot;ctrl+b&quot;], &quot;command&quot;: &quot;open_browser&quot; }</code></p>
+<p><strong>ok！</strong>这样就完成了，可以测试下了。<br>打开一个 html 或 php 文件，<code>ctrl+b</code> 试试，没意外的话文件会在默认浏览器打开了。url_map 里配置的站点目录会映射到 URL (这里为 localhost)。</p>
+<blockquote>
+<p>PS：如果要用指定浏览器预览，也可以将最后一行代码改成这样：</p>
+</blockquote>
+<p><code>webbrowser.get(&lt;span class=&quot;hljs-string&quot;&gt;&#39;safari&#39;&lt;/span&gt;).open_new(url)</code></p>
+<p>webbrowser 具体支持 get 哪些浏览器，可以通过 webbrowser_browsers 查看。</p>
+<p><strong>另外</strong>：安装扩展包也能实现，只是稍微复杂点，但功能更丰富。<br>主要是这两个包：<strong><code>Side​Bar​Enhancements、View In Browser</code></strong></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/">生产环境</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Sublime-Text/">Sublime Text</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/articles/201809/sublime-text-from-installation-to-configuration.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Sublime Text从安装到配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/articles/201809/markdown-writing-under-sublime-text.html">
+                        <span class="hidden-mobile">Sublime Text 下的 Markdown 写作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.14/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "QE9zukzKtTExVYPgQcRNinBu-MdYXbMMI",
+        app_key: "yXWKt3QeCzAdqcP0MEU0WU5u",
+        placeholder: "说点什么吧~~",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"Black","artist":"Danger Mouse$Daniele Luppi","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/Black%20-%20Danger%20Mouse%26Daniele%20Luppi.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000001hw1hV2MsSjb.jpg"},{"name":"U-Turn","artist":"Nicola Piovani","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/U-Turn%20%28Lili%29%20-%20Nicola%20Piovani.mp3","cover":"https://p3.music.126.net/FP1JjtVkmkkipdKTI7rhLw==/1684451813758720.jpg"},{"name":"拒绝情话","artist":"庆庆","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E6%8B%92%E7%BB%9D%E6%83%85%E8%AF%9D%20-%20%E5%BA%86%E5%BA%86.mp3","cover":"https://p3.music.126.net/rG7zE6K3A373UH8XHI_NqQ==/109951163400201893.jpg"},{"name":"アイロニ","artist":"majiko","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E3%82%A2%E3%82%A4%E3%83%AD%E3%83%8B%20-%20majiko.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000004GC5gr1Djev0.jpg"},{"name":"萨琳娜","artist":"张尧","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E8%90%A8%E7%90%B3%E5%A8%9C%20-%20%E5%BC%A0%E5%B0%A7.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000kT79D3XFaYJ.jpg"},{"name":"絆","artist":"miu-clips","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E7%B5%86%20-%20miu-clips.mp3","cover":"5TLKyo1Ta7Yg==/109951163338271797.jpg"},{"name":"圆","artist":"AGA","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E5%9C%86%20-%20AGA.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000V9yae4XbyxL.jpg"},{"name":"充电器","artist":"コアラモード","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E5%85%85%E7%94%B5%E5%99%A8%20-%20%E3%82%B3%E3%82%A2%E3%83%A9%E3%83%A2%E3%83%BC%E3%83%89.mp3","cover":"https://p3.music.126.net/hLC4zRBvnQslwmx19EJCvQ==/18565253836759289.jpg"},{"name":"记昨日书","artist":"伏仪","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E8%AE%B0%E6%98%A8%E6%97%A5%E4%B9%A6%20-%20%E4%BC%8F%E4%BB%AA.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000004dZ9EI1JDzsW.jpg"},{"name":"The Flood","artist":"Joshua Hyslop","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/The%20Flood%20-%20Joshua%20Hyslop.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M0000037uJuv3VB1Do.jpg"},{"name":"雨下一整晚","artist":"周杰伦","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E9%9B%A8%E4%B8%8B%E4%B8%80%E6%95%B4%E6%99%9A%20-%20Jay.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M000000bviBl4FjTpO.jpg"},{"name":"Think Again","artist":"Kate Havnevik","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/Think%20Again%20-%20Kate%20Havnevik.mp3","cover":"https://p3.music.126.net/XfcPoljRr2ONWK3A40fa2g==/827932255760293.jpg"},{"name":"It Takes A Lot To Konw A Man","artist":"Damien Rice","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/It%20Takes%20A%20Lot%20To%20Konw%20A%20Man%20-%20Damien%20Rice.mp3","cover":"https://y.gtimg.cn/music/photo_new/T002R300x300M0000018GfAl2V7XR8.jpg"},{"name":"日が落ちるまで","artist":"ハンバート ハンバート","url":"https://blog-musics.oss-cn-shanghai.aliyuncs.com/%E6%97%A5%E3%81%8C%E8%90%BD%E3%81%A1%E3%82%8B%E3%81%BE%E3%81%A7%20-%20%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%83%88%20%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%83%88.mp3","cover":"https://p3.music.126.net/RqP5ECFl5Qy-x-obsuudKQ==/938982930120740.jpg"}]
+    });
+  }
+</script>
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- 一言 -->
+    <p id="hitokoto" style="font-weight: bold;font-size: 17px;color: #4ecdc4;">好好学习，天天向上</p>
+    <p id="from" style="font-style: italic;color: #1a535c"></p>
+
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love" style="color: #ff6b6b"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      <i class="iconfont icon-codeforces"></i>
+      <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    &nbsp;|&nbsp;
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      <i class="iconfont icon-friends"></i>
+      <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?3a1762ce87be0b3e32c5317edbad11c1";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "让Sublime Text支持浏览器中预览&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 加入一言 -->
+<script>
+  fetch('https://v1.hitokoto.cn?c=d&c=i&c=k')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto')
+      hitokoto.innerText = '“' + data.hitokoto + '”'
+      const from = document.getElementById('from')
+      from.innerText = '——— 《' + data.from + '》'
+      })
+      .catch(console.error)
+</script>
+
+
+</body>
+</html>
